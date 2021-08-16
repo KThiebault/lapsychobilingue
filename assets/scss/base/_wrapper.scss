@@ -1,0 +1,5 @@
+.wrapper {
+  width: 100%;
+  padding-left: clamp(var(--default-space), calc(50% - var(--wrapper-width) / 2), calc(50% - var(--wrapper-width) / 2));
+  padding-right: clamp(var(--default-space), calc(50% - var(--wrapper-width) / 2), calc(50% - var(--wrapper-width) / 2));
+}

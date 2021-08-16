@@ -16,7 +16,8 @@ class HomeController
     {
         return new Response($twig->render('home/index.html.twig',
             [
-                'posts' => $repository->findLatest()
+                'posts' => $repository->findLatest(),
+                'menu' => 'home'
             ]
         ));
     }

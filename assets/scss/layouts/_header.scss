@@ -1,0 +1,25 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin: calc(var(--default-space) * 4) 0;
+  nav ul {
+    display: flex;
+    > li {
+      margin-right: calc(var(--default-space) * 4);
+      &:last-child {
+        margin-right: 0;
+      }
+      a {
+        font-weight: 500;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: inherit;
+        transition: .3s color;
+        &:hover,
+        &[aria-current] {
+          color: var(--focus-color)
+        }
+      }
+    }
+  }
+}
