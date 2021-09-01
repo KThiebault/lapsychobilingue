@@ -13,6 +13,5 @@ class HomeControllerTest extends WebTestCase
 
         $this->assertResponseIsSuccessful();
         $this->assertCount(3, $crawler->filter('h2'));
-        $this->assertSelectorTextContains('h1', 'Hello world');
     }
 }

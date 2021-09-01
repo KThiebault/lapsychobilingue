@@ -2,24 +2,72 @@
   display: flex;
   justify-content: space-between;
   margin: calc(var(--default-space) * 4) 0;
+
   nav ul {
-    display: flex;
-    > li {
-      margin-right: calc(var(--default-space) * 4);
-      &:last-child {
-        margin-right: 0;
+    display: none;
+  }
+
+  button {
+    position: relative;
+    cursor: pointer;
+    height: 20px;
+    width: 40px;
+    &[aria-hidden] {
+      display: none;
+    }
+    span {
+      top: 50%;
+      transform: translateY(-50%);
+      width: 32px;
+      &,
+      &:before,
+      &:after {
+        content: "";
+        display: block;
+        position: absolute;
+        right: 0;
+        height: 4px;
+        border-radius: 1px;
+        background-color: #52989B;
       }
-      a {
-        font-weight: 500;
-        text-transform: uppercase;
-        text-decoration: none;
-        color: inherit;
-        transition: .3s color;
-        &:hover,
-        &[aria-current] {
-          color: var(--focus-color)
+      &:before {
+        top: -8px;
+        width: 40px;
+      }
+      &:after {
+        bottom: -8px;
+        width: 24px;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 650px) {
+  .header {
+    button {
+      display: none;
+    }
+    nav ul {
+      display: flex;
+      > li {
+        margin-right: calc(var(--default-space) * 4);
+        &:last-child {
+          margin-right: 0;
+        }
+        a {
+          font-weight: 500;
+          text-transform: uppercase;
+          text-decoration: none;
+          color: inherit;
+          transition: .3s color;
+          &:hover,
+          &[aria-current] {
+            color: var(--focus-color)
+          }
         }
       }
     }
   }
 }
+
+

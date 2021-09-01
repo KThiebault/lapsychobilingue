@@ -22,7 +22,7 @@ class PostRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('p')
             ->where('p.online = 1')
-            ->andWhere('p.onlineAt >= :now')
+            ->andWhere('p.onlineAt <= :now')
             ->setParameter('now', (new \DateTime())->format('Y-m-d h:i:s'))
             ->setMaxResults($maxResults)
             ->getQuery()
