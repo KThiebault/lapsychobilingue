@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <section class="container-ls container-reverse">
+    <section class="wrapper default__section container container-reverse gap-3 ls-gap-10">
         <div>
-            <h1 class="primary__title">Lorem Ipsum is simply </h1>
+            <h1 class="primary__title">Lorem Ipsum is simply</h1>
             <p class="mt-1 ls-mt-3 mb-2 ls-mb-4"><strong>It was popularised in the 1960s with the release of Letraset sheets   containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</strong></p>
             <div class="container container-center">
                 <a class="btn btn-outline" href="">En savoir plus</a>
-                <a class="btn btn-outline" href="">Prendre rendez-vous</a>
+                <a class="btn btn-primary" href="">Prendre rendez-vous</a>
             </div>
         </div>
         <picture>
@@ -15,6 +15,62 @@
             <source media="(min-width: 800px)" srcset="images/3918491.jpg">
             <img loading="lazy" src="images/3918491.jpg" alt="Chris debout tenant sa fille Elva dans ses bras">
         </picture>
+    </section>
+    <section class="wrapper default__section">
+        <div class="container section__header gap-2 ls-gap-10">
+            <h2 class="section__header__title secondary__title">Lorem Ipsum is simply It was popularised</h2>
+            <p class="section__header__content">It was popularised in the 1960s with the release of Letraset sheets  containing Lorem Ipsum passages, and more recently.</p>
+        </div>
+        <div class="container-card gap-2 ls-gap-4 mt-1 ls-mt-3">
+            <div class="card card-background">
+                <img loading="lazy" src="images/3918491.jpg" alt="Chris debout tenant sa fille Elva dans ses bras">
+                <p class="card__content">It was popularised in the 1960s with the release of Letraset sheets  containing Lorem Ipsum passages, and more recently.It was popularised in the 1960s with the release of Letraset sheets  containing Lorem Ipsum passages, and more recently.</p>
+            </div>
+            <div class="card card-background">
+                <img loading="lazy" src="images/3918491.jpg" alt="Chris debout tenant sa fille Elva dans ses bras">
+                <p class="card__content">It was popularised in the 1960s with the release of Letraset sheets  containing Lorem Ipsum passages, and more recently.It was popularised in the 1960s with the release of Letraset sheets  containing Lorem Ipsum passages, and more recently.</p>
+            </div>
+            <div class="card card-background">
+                <img loading="lazy" src="images/3918491.jpg" alt="Chris debout tenant sa fille Elva dans ses bras">
+                <p class="card__content">It was popularised in the 1960s with the release of Letraset sheets  containing Lorem Ipsum passages, and more recently.It was popularised in the 1960s with the release of Letraset sheets  containing Lorem Ipsum passages, and more recently.</p>
+            </div>
+        </div>
+    </section>
+    <section class="wrapper wrapper-background default__section">
+        <div class="container section__header gap-2 ls-gap-13">
+            <h2 class="section__header__title secondary__title">Lorem Ipsum is simply It was popularised</h2>
+            <p class="section__header__content">It was popularised in the 1960s with the release of Letraset sheets  containing Lorem Ipsum passages, and more recently.</p>
+        </div>
+        <div class="container-grid gap-2 ls-gap-6 mt-1 ls-mt-4">
+            <div class="card-large">
+                <div class="card-large__header">
+                    <img loading="lazy" src="images/3918491.jpg" alt="Chris debout tenant sa fille Elva dans ses bras" width="72" height="72">
+                    <h3 class="card__title">Lorem Ipsum is simply</h3>
+                </div>
+                <p class="card__content">It was popularised in the 1960s with the release of Letraset sheets  containing Lorem Ipsum passages, and more recently. It was popularised in the 1960s with the release of Letraset sheets  containing. It was popularised in the 1960s with the release of Letraset sheets  containing</p>
+            </div>
+            <div class="card-large">
+                <div class="card-large__header">
+                    <img loading="lazy" src="images/3918491.jpg" alt="Chris debout tenant sa fille Elva dans ses bras" width="72" height="72">
+                    <h3 class="card__title">Lorem Ipsum is simply</h3>
+                </div>
+                <p class="card__content">It was popularised in the 1960s with the release of Letraset sheets  containing Lorem Ipsum passages, and more recently. It was popularised in the 1960s with the release of Letraset sheets  containing. It was popularised in the 1960s with the release of Letraset sheets  containing</p>
+            </div>
+            <div class="card-large">
+                <div class="card-large__header">
+                    <img loading="lazy" src="images/3918491.jpg" alt="Chris debout tenant sa fille Elva dans ses bras" width="72" height="72">
+                    <h3 class="card__title">Lorem Ipsum is simply</h3>
+                </div>
+                <p class="card__content">It was popularised in the 1960s with the release of Letraset sheets  containing Lorem Ipsum passages, and more recently. It was popularised in the 1960s with the release of Letraset sheets  containing. It was popularised in the 1960s with the release of Letraset sheets  containing</p>
+            </div>
+            <div class="card-large">
+                <div class="card-large__header">
+                    <img loading="lazy" src="images/3918491.jpg" alt="Chris debout tenant sa fille Elva dans ses bras" width="72" height="72">
+                    <h3 class="card__title">Lorem Ipsum is simply</h3>
+                </div>
+                <p class="card__content">It was popularised in the 1960s with the release of Letraset sheets  containing Lorem Ipsum passages, and more recently. It was popularised in the 1960s with the release of Letraset sheets  containing. It was popularised in the 1960s with the release of Letraset sheets  containing</p>
+            </div>
+        </div>
     </section>
     {#
         {% for post in posts %}

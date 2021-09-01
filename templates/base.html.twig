@@ -11,12 +11,10 @@
         {% endblock %}
     </head>
     <body>
-    <div class="wrapper">
-        {% include 'partials/_header.html.twig' %}
-        <main role="main">
-            {% block body %}{% endblock %}
-        </main>
-        {% include 'partials/_footer.html.twig' %}
-    </div>
+    {% include 'partials/_header.html.twig' %}
+    <main role="main">
+        {% block body %}{% endblock %}
+    </main>
+    {% include 'partials/_footer.html.twig' %}
     </body>
 </html>

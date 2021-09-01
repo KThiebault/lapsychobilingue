@@ -1,10 +1,14 @@
-@for $index from 1 through 10 {
+@for $index from 1 through 13 {
   .mt-#{$index} {
     margin-top: calc(var(--default-space) * #{$index});
   }
 
   .mb-#{$index} {
     margin-bottom: calc(var(--default-space) * #{$index});
+  }
+
+  .gap-#{$index} {
+    gap: calc(var(--default-space) * #{$index});
   }
 
   @media only screen and (min-width: 650px) {
@@ -14,6 +18,10 @@
 
     .ls-mb-#{$index} {
       margin-bottom: calc(var(--default-space) * #{$index});
+    }
+
+    .ls-gap-#{$index} {
+      gap: calc(var(--default-space) * #{$index});
     }
   }
 }

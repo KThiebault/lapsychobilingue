@@ -62,7 +62,7 @@
           transition: .3s color;
           &:hover,
           &[aria-current] {
-            color: var(--focus-color)
+            color: var(--primary-color)
           }
         }
       }
