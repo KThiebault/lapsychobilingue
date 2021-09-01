@@ -13,7 +13,9 @@
     <body>
     <div class="wrapper">
         {% include 'partials/_header.html.twig' %}
-        {% block body %}{% endblock %}
+        <main role="main">
+            {% block body %}{% endblock %}
+        </main>
         {% include 'partials/_footer.html.twig' %}
     </div>
     </body>

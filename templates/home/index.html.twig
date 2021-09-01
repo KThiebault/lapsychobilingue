@@ -1,9 +1,26 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {% for post in posts %}
-        <h2>{{ post.title }}</h2>
-        {{ post.summary }}
-        {{ post.createdAt|date('d/m/Y') }}
-    {% endfor %}
+    <section class="container-ls container-reverse">
+        <div>
+            <h1 class="primary__title">Lorem Ipsum is simply </h1>
+            <p class="mt-1 ls-mt-3 mb-2 ls-mb-4"><strong>It was popularised in the 1960s with the release of Letraset sheets   containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</strong></p>
+            <div class="container container-center">
+                <a class="btn btn-outline" href="">En savoir plus</a>
+                <a class="btn btn-outline" href="">Prendre rendez-vous</a>
+            </div>
+        </div>
+        <picture>
+            <source media="(max-width: 799px)" srcset="images/3918491.jpg">
+            <source media="(min-width: 800px)" srcset="images/3918491.jpg">
+            <img loading="lazy" src="images/3918491.jpg" alt="Chris debout tenant sa fille Elva dans ses bras">
+        </picture>
+    </section>
+    {#
+        {% for post in posts %}
+            <h2>{{ post.title }}</h2>
+            {{ post.summary }}
+            {{ post.createdAt|date('d/m/Y') }}
+        {% endfor %}
+    #}
 {% endblock %}

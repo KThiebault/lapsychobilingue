@@ -1,0 +1,49 @@
+%container {
+  display: flex;
+  img, picture {
+    flex: none;
+  }
+}
+
+.container {
+  @extend %container;
+  flex-direction: column;
+}
+
+.container-ls {
+  @extend %container;
+  flex-direction: column;
+  gap: calc(var(--default-space) * 3);
+}
+
+.container-center {
+  align-items: center;
+  gap: calc(var(--default-space) * 2);
+}
+
+.container-reverse {
+  flex-direction: row-reverse;
+}
+
+.container-ls.container-reverse {
+  flex-direction: column;
+}
+
+@media only screen and (min-width: 650px) {
+  .container {
+    flex-direction: row;
+  }
+
+  .container-ls {
+    flex-direction: row;
+    gap: calc(var(--default-space) * 10);
+  }
+
+  .container-ls.container-reverse {
+    flex-direction: row-reverse;
+  }
+
+  .container-center {
+    gap: calc(var(--default-space) * 4);
+  }
+}
