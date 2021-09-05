@@ -1,0 +1,51 @@
+%container {
+  display: flex;
+  flex-direction: column;
+  img, picture {
+    width: 100%;
+    height: auto;
+  }
+}
+
+%container-grid {
+  display: grid;
+}
+
+.container {
+  @extend %container;
+}
+
+.container-grid {
+  @extend %container-grid;
+}
+
+.container-card {
+  @extend %container-grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+
+.container-center {
+  align-items: center;
+}
+
+.container-reverse {
+  flex-direction: row-reverse;
+}
+
+.container.container-reverse {
+  flex-direction: column;
+}
+
+@media only screen and (min-width: 850px) {
+  %container {
+    flex-direction: row;
+  }
+
+  .container-grid {
+    grid-template-columns: repeat(auto-fill, minmax(370px, 1fr));
+  }
+
+  .container.container-reverse {
+    flex-direction: row-reverse;
+  }
+}

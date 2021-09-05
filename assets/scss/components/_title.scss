@@ -1,0 +1,23 @@
+%title {
+  line-height: 1.1;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.primary__title {
+  @extend %title;
+  font-size: 2.2rem;
+  color: var(--primary-color);
+}
+
+.secondary__title {
+  @extend %title;
+  font-size: 1.5rem;
+  color: var(--secondary-color);
+}
+
+@media only screen and (min-width: 650px) {
+  .primary__title {
+    font-size: 2.6rem;
+  }
+}
