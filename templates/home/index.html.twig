@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <section class="wrapper default__section container container-reverse gap-3 ls-gap-10">
+    <section class="wrapper default__section container container-reverse gap-3 ms-gap-5 ls-gap-10">
         <div>
             <h1 class="primary__title">Lorem Ipsum is simply</h1>
             <p class="mt-1 ls-mt-3 mb-2 ls-mb-4"><strong>It was popularised in the 1960s with the release of Letraset sheets   containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</strong></p>
-            <div class="container container-center">
+            <div class="container container-center gap-2 ls-gap-4">
                 <a class="btn btn-outline" href="">En savoir plus</a>
                 <a class="btn btn-primary" href="">Prendre rendez-vous</a>
             </div>
@@ -17,7 +17,7 @@
         </picture>
     </section>
     <section class="wrapper default__section">
-        <div class="container section__header gap-2 ls-gap-10">
+        <div class="container section__header gap-1 ls-gap-10">
             <h2 class="section__header__title secondary__title">Lorem Ipsum is simply It was popularised</h2>
             <p class="section__header__content">It was popularised in the 1960s with the release of Letraset sheets  containing Lorem Ipsum passages, and more recently.</p>
         </div>
@@ -37,7 +37,7 @@
         </div>
     </section>
     <section class="wrapper wrapper-background default__section">
-        <div class="container section__header gap-2 ls-gap-13">
+        <div class="container section__header gap-1 ls-gap-13">
             <h2 class="section__header__title secondary__title">Lorem Ipsum is simply It was popularised</h2>
             <p class="section__header__content">It was popularised in the 1960s with the release of Letraset sheets  containing Lorem Ipsum passages, and more recently.</p>
         </div>
@@ -72,11 +72,27 @@
             </div>
         </div>
     </section>
-    {#
-        {% for post in posts %}
-            <h2>{{ post.title }}</h2>
-            {{ post.summary }}
-            {{ post.createdAt|date('d/m/Y') }}
-        {% endfor %}
-    #}
+    <section class="wrapper default__section">
+        <div class="section__header section__header-center container gap-1">
+            <h2 class="section__header__title secondary__title">Lorem Ipsum is simply It was popularised</h2>
+            <p class="section__header__content">It was popularised in the 1960s with the release of Letraset sheets  containing Lorem Ipsum passages, and more recently.</p>
+        </div>
+        <div class="container-grid">
+            {% for index, post in posts %}
+                <article class="card{{ index == 0 ? ' card-expanded' }}">
+                    <div class="card__header card__header-date">
+                        <img loading="lazy" src="images/3918491.jpg" alt="Chris debout tenant sa fille Elva dans ses bras">
+                        <span class="card__date">{{ post.createdAt|date('d/m/Y') }}</span>
+                    </div>
+                    <h3 class="card__title">{{ post.title }}</h3>
+                    <p class="card__content">{{ post.summary }}</p>
+                </article>
+            {% endfor %}
+            <div class="container container-center col-span-2 gap-2 ls-gap-5 justify-center">
+                <a class="btn btn-outline" href="">Consulter tous les articles</a>
+                <a class="btn btn-outline" href="">#lapsychobilingue</a>
+            </div>
+
+        </div>
+    </section>
 {% endblock %}

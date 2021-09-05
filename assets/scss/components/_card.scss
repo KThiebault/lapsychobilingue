@@ -1,7 +1,7 @@
 .card {
   display: flex;
   flex-direction: column;
-  padding: var(--default-space);
+  padding: calc(var(--default-space) * 2);
   gap: calc(var(--default-space) * 2);
 }
 
@@ -27,9 +27,27 @@
   color: var(--primary-color);
 }
 
+.card__header-date {
+  display: flex;
+}
+
+.card__date {
+  color: var(--primary-color);
+  writing-mode: vertical-rl;
+  transform: rotate(180deg)
+}
+
 @media only screen and (min-width: 650px) {
   .card {
     padding: calc(var(--default-space) * 3);
+  }
+
+  .card-expanded {
+    grid-row: 1 / span 2;
+
+    .card__header img {
+      height: 400px;
+    }
   }
 
   .card-large__header {

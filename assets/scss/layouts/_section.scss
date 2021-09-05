@@ -3,8 +3,16 @@
   padding-bottom: calc(var(--default-space) * 2);
 }
 
+.section__header {
+  margin-bottom: calc(var(--default-space) * 2);
+}
+
 .section__header__content {
   font-weight: 500;
+}
+
+.section__header-center {
+  text-align: center;
 }
 
 @media only screen and (min-width: 650px) {
@@ -19,6 +27,18 @@
 
   .section__header__content {
     max-width: 332px;
+  }
+
+  .section__header-center {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .section__header__title {
+      max-width: none;
+    }
+    .section__header__content {
+      max-width: 500px;
+    }
   }
 }
 

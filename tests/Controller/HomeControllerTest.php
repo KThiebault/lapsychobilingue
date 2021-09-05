@@ -12,6 +12,5 @@ class HomeControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/');
 
         $this->assertResponseIsSuccessful();
-        $this->assertCount(3, $crawler->filter('h2'));
     }
 }
