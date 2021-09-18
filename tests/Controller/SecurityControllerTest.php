@@ -25,9 +25,12 @@ class SecurityControllerTest extends WebTestCase
         $client->request('GET', '/login');
         $client->submitForm('Se connecter', [
             'email' => 'fixture1@fixture.fr',
-            'password' => 'fixtur'
+            'password' => 'failure'
         ]);
 
         $this->assertResponseRedirects('/login', Response::HTTP_FOUND);
+
+        $client->followRedirect();
+        $this->assertSelectorTextSame('.alert', 'Invalid credentials');
     }
 }
