@@ -1,0 +1,33 @@
+.form__label {
+  font-weight: 500;
+  margin-bottom: calc(var(--default-space) / 2);
+}
+
+.form__input {
+  padding: var(--default-space);
+  border: 1px solid var(--primary-color);
+  border-radius: 2px;
+}
+
+.form__control {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.form__control-reverse {
+  justify-content: flex-end;
+  flex-direction: row-reverse;
+}
+
+form {
+  width: 100%;
+}
+
+@media only screen and (min-width: 400px) {
+  .form__control {
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

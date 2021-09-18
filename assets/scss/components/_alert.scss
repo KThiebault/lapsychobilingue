@@ -1,0 +1,9 @@
+.alert {
+  display: flex;
+  flex-direction: column;
+  padding: var(--default-space) calc(var(--default-space) * 2);
+}
+
+.alert-danger {
+  color: var(--alert-color);
+}
