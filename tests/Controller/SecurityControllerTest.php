@@ -22,7 +22,7 @@ class SecurityControllerTest extends WebTestCase
     public function testLoginIfError()
     {
         $client = static::createClient();
-        $client->request('GET', '/login');
+        $client->request('GET', '/connexion');
         $client->submitForm('Se connecter', [
             'email' => 'fixture1@fixture.fr',
             'password' => 'failure'
@@ -32,5 +32,21 @@ class SecurityControllerTest extends WebTestCase
 
         $client->followRedirect();
         $this->assertSelectorTextSame('.alert', 'Invalid credentials');
+    }
+
+    public function testRegistrationSuccess()
+    {
+        $client = static::createClient();
+        $client->request('GET', '/inscription');
+        $client->submitForm('Inscription', [
+            'email' => 'test@test.fr',
+            'name' => 'Robot',
+            'password' => 'test1234',
+            'confirmation_password' => 'test1234',
+            'age' => '25',
+            'nationality' => 'french'
+        ]);
+
+        $this->assertResponseRedirects('/mon-compte', Response::HTTP_FOUND);
     }
 }

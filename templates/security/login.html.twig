@@ -19,12 +19,12 @@
             </div>
             <div class="form__control form__control-reverse mb-2">
                 <label for="remember" class="form__label">Se souvenir de moi</label>
-                <input type="checkbox" name="remember_me" id="remember" class="form__input">
+                <input type="checkbox" name="remember_me" id="remember" class="form__input" required>
             </div>
             <div class="form__control mb-3">
                 <button class="btn btn-outline">Se connecter</button>
             </div>
         </form>
-        <span class="fw-5">Vous n'avez pas de compte ? <a href="">Inscrivez-vous !</a></span>
+        <span class="fw-5">Vous n'avez pas de compte ? <a href="{{ path('security_registration') }}">Inscrivez-vous !</a></span>
     </section>
 {% endblock %}

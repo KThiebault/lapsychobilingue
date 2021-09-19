@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <section class="wrapper wrapper-height wrapper-center">
+        <h1 class="primary__title mb-3">Inscription</h1>
+        {{ form_start(registration_form) }}
+            {{ form_widget(registration_form) }}
+            <div class="form__control mb-3">
+                <button class="btn btn-outline">Inscription</button>
+            </div>
+        {{ form_end(registration_form) }}
+        <span class="fw-5">Vous n'avez pas de compte ? <a href="{{ path('security_registration') }}">Inscrivez-vous !</a></span>
+    </section>
+{% endblock %}
