@@ -21,7 +21,10 @@ class UserFixtures extends Fixture
     {
         for ($i = 1; $i <= 100; $i++) {
             $user = (new User())
-                ->setEmail(sprintf('fixture%d@fixture.fr', $i));
+                ->setEmail(sprintf('fixture%d@fixture.fr', $i))
+                ->setName(sprintf('test%d', $i))
+                ->setAge(new \DateTimeImmutable('1995-12-08'))
+                ->setNationality($i > 50 ? 'french' : 'italiano');
             $user->setPassword($this->passwordHasher->hashPassword($user, 'fixture'));
 
             $manager->persist($user);

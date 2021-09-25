@@ -7,19 +7,19 @@ use Symfony\Component\HttpFoundation\Response;
 
 class SecurityControllerTest extends WebTestCase
 {
-    public function testLoginIfSuccess()
+    public function testLoginIfSuccess(): void
     {
         $client = static::createClient();
-        $client->request('GET', '/login');
+        $client->request('GET', '/connexion');
         $client->submitForm('Se connecter', [
             'email' => 'fixture1@fixture.fr',
             'password' => 'fixture'
         ]);
 
-        $this->assertResponseRedirects('/', Response::HTTP_FOUND);
+        self::assertResponseRedirects('/', Response::HTTP_FOUND);
     }
 
-    public function testLoginIfError()
+    public function testLoginIfError(): void
     {
         $client = static::createClient();
         $client->request('GET', '/connexion');
@@ -28,25 +28,151 @@ class SecurityControllerTest extends WebTestCase
             'password' => 'failure'
         ]);
 
-        $this->assertResponseRedirects('/login', Response::HTTP_FOUND);
+        self::assertResponseRedirects('/connexion', Response::HTTP_FOUND);
 
         $client->followRedirect();
-        $this->assertSelectorTextSame('.alert', 'Invalid credentials');
+        self::assertSelectorTextSame('.alert', 'Invalid credentials');
     }
 
-    public function testRegistrationSuccess()
+    public function testRegistrationSuccess(): void
     {
         $client = static::createClient();
         $client->request('GET', '/inscription');
         $client->submitForm('Inscription', [
-            'email' => 'test@test.fr',
-            'name' => 'Robot',
-            'password' => 'test1234',
-            'confirmation_password' => 'test1234',
-            'age' => '25',
-            'nationality' => 'french'
+            'registration[email]' => 'test@test.fr',
+            'registration[name]' => 'test',
+            'registration[plainPassword][first]' => 'test1234',
+            'registration[plainPassword][second]' => 'test1234',
+            'registration[age]' => '1995-12-08',
+            'registration[nationality]' => 'french',
         ]);
 
-        $this->assertResponseRedirects('/mon-compte', Response::HTTP_FOUND);
+        self::assertResponseRedirects('/', Response::HTTP_FOUND);
+    }
+
+    /**
+     * @dataProvider dataFailureProvider
+     */
+    public function testRegistrationFail(array $formData, string $message): void
+    {
+        $client = static::createClient();
+        $client->request('GET', '/inscription');
+        $client->submitForm('Inscription', $formData);
+
+        self::assertSelectorTextSame('ul.form__errors li', $message);
+    }
+
+    public function dataFailureProvider(): \Generator
+    {
+        yield [
+            [
+                'registration[email]' => '',
+                'registration[name]' => 'test',
+                'registration[plainPassword][first]' => 'test1234',
+                'registration[plainPassword][second]' => 'test1234',
+                'registration[age]' => '1995-12-08',
+                'registration[nationality]' => 'french',
+            ],
+            'This value should not be blank.'
+        ];
+        yield [
+            [
+                'registration[email]' => 'test',
+                'registration[name]' => 'test',
+                'registration[plainPassword][first]' => 'test1234',
+                'registration[plainPassword][second]' => 'test1234',
+                'registration[age]' => '1995-12-08',
+                'registration[nationality]' => 'french',
+            ],
+            'This value is not a valid email address.'
+        ];
+        yield [
+            [
+                'registration[email]' => 'fixture1@fixture.fr',
+                'registration[name]' => 'test',
+                'registration[plainPassword][first]' => 'test1234',
+                'registration[plainPassword][second]' => 'test1234',
+                'registration[age]' => '1995-12-08',
+                'registration[nationality]' => 'french',
+            ],
+            'This value is already used.'
+        ];
+        yield [
+            [
+                'registration[email]' => 'test@test.fr',
+                'registration[name]' => '',
+                'registration[plainPassword][first]' => 'test1234',
+                'registration[plainPassword][second]' => 'test1234',
+                'registration[age]' => '1995-12-08',
+                'registration[nationality]' => 'french',
+            ],
+            'This value should not be blank.'
+        ];
+        yield [
+            [
+                'registration[email]' => 'test@test.fr',
+                'registration[name]' => 'z',
+                'registration[plainPassword][first]' => 'test1234',
+                'registration[plainPassword][second]' => 'test1234',
+                'registration[age]' => '1995-12-08',
+                'registration[nationality]' => 'french',
+            ],
+            'This value is too short. It should have 2 characters or more.'
+        ];
+        yield [
+            [
+                'registration[email]' => 'test@test.fr',
+                'registration[name]' => 'testtttttttttttttttttttttt',
+                'registration[plainPassword][first]' => 'test1234',
+                'registration[plainPassword][second]' => 'test1234',
+                'registration[age]' => '1995-12-08',
+                'registration[nationality]' => 'french',
+            ],
+            'This value is too long. It should have 25 characters or less.'
+        ];
+        yield [
+            [
+                'registration[email]' => 'test@test.fr',
+                'registration[name]' => 'test',
+                'registration[plainPassword][first]' => 'test',
+                'registration[plainPassword][second]' => 'test1234',
+                'registration[age]' => '1995-12-08',
+                'registration[nationality]' => 'french',
+            ],
+            'The password fields must match.'
+        ];
+        yield [
+            [
+                'registration[email]' => 'test@test.fr',
+                'registration[name]' => 'test',
+                'registration[plainPassword][first]' => 'test',
+                'registration[plainPassword][second]' => 'test',
+                'registration[age]' => '1995-12-08',
+                'registration[nationality]' => 'french',
+            ],
+            'This value is too short. It should have 6 characters or more.'
+        ];
+        yield [
+            [
+                'registration[email]' => 'test@test.fr',
+                'registration[name]' => 'test',
+                'registration[plainPassword][first]' => 'test1234',
+                'registration[plainPassword][second]' => 'test1234',
+                'registration[age]' => '',
+                'registration[nationality]' => 'french',
+            ],
+            'This value should not be blank.'
+        ];
+        yield [
+            [
+                'registration[email]' => 'test@test.fr',
+                'registration[name]' => 'test',
+                'registration[plainPassword][first]' => 'test1234',
+                'registration[plainPassword][second]' => 'test1234',
+                'registration[age]' => (New \DateTime())->format('Y-m-d'),
+                'registration[nationality]' => 'french',
+            ],
+            'You must be 18 years or older.'
+        ];
     }
 }

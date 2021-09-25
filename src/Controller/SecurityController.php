@@ -4,29 +4,52 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Type\RegistrationType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Twig\Environment;
 
-class SecurityController
+final class SecurityController
 {
-    #[Route(path: '/connexion' , name: 'security_login', methods: ['GET', 'POST'])]
-    public function login(AuthenticationUtils$authenticationUtils, Environment $environment): Response
+    public function __construct(private Environment $environment)
     {
-        return new Response($environment->render('security/login.html.twig', [
+    }
+
+    #[Route(path: '/connexion' , name: 'security_login', methods: ['GET', 'POST'])]
+    public function login(AuthenticationUtils$authenticationUtils): Response
+    {
+        return new Response($this->environment->render('security/login.html.twig', [
             'error' => $authenticationUtils->getLastAuthenticationError(),
             'menu' => 'login'
         ]));
     }
 
     #[Route(path: '/inscription' , name: 'security_registration', methods: ['GET', 'POST'])]
-    public function registration(FormFactoryInterface $formFactory, Environment $environment): Response
-    {
-        $form = $formFactory->create(RegistrationType::class);
-        return new Response($environment->render('security/registration.html.twig', [
+    public function registration(
+        FormFactoryInterface $formFactory,
+        Request $request,
+        EntityManagerInterface $entityManager,
+        UserPasswordHasherInterface $hasher,
+    ): Response {
+        $form = $formFactory->create(RegistrationType::class)->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user = $form->getData();
+            $user->setPassword($hasher->hashPassword($user, $form->get('plainPassword')->getData()));
+
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            return new RedirectResponse('/');
+        }
+        return new Response($this->environment->render('security/registration.html.twig', [
             'registration_form' => $form->createView(),
             'menu' => 'login'
         ]));

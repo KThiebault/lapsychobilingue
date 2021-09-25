@@ -9,13 +9,16 @@ use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Id;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[
     Entity(repositoryClass: UserRepository::class),
+    UniqueEntity('email')
 ]
-class User implements UserInterface, PasswordAuthenticatedUserInterface
+final class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[
         Id,
@@ -24,11 +27,39 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     ]
     private int $id;
 
-    #[Column(type: 'string', unique: true)]
+    #[
+        Column(type: 'string', length: 255, unique: true),
+        Assert\NotBlank,
+        Assert\Email
+    ]
     private string $email;
 
     #[Column(type: 'string')]
     private string $password;
+
+    #[
+        Column(type: 'string', length: 255),
+        Assert\NotBlank,
+        Assert\Length(
+            min: 2,
+            max: 25,
+        )
+    ]
+    private string $name;
+
+    #[
+        Column(type: 'string', length: 255),
+        Assert\NotBlank,
+        Assert\Choice(['french', 'italian'])
+    ]
+    private string $nationality;
+
+    #[
+        Column(type: 'date_immutable'),
+        Assert\NotBlank,
+        Assert\LessThanOrEqual('-18 years', message: 'You must be 18 years or older.')
+    ]
+    private ?\DateTimeImmutable $age;
 
     #[Column(type: 'json')]
     private array $roles = [];
@@ -63,6 +94,39 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getPassword(): string
     {
         return $this->password;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+        return $this;
+    }
+
+    public function getNationality(): string
+    {
+        return $this->nationality;
+    }
+
+    public function setNationality(string $nationality): self
+    {
+        $this->nationality = $nationality;
+        return $this;
+    }
+
+    public function getAge(): \DateTimeImmutable
+    {
+        return $this->age;
+    }
+
+    public function setAge(?\DateTimeImmutable $age): self
+    {
+        $this->age = $age;
+        return $this;
     }
 
     public function getRoles(): array

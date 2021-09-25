@@ -4,11 +4,45 @@
     <section class="wrapper wrapper-height wrapper-center">
         <h1 class="primary__title mb-3">Inscription</h1>
         {{ form_start(registration_form) }}
-            {{ form_widget(registration_form) }}
+            <div class="form__container">
+                <div class="form__control mb-2">
+                    {{ form_label(registration_form.email, null, {'label_attr': {'class': 'form__label'}}) }}
+                    {{ form_errors(registration_form.email) }}
+                    {{ form_widget(registration_form.email, {'attr': {'class': 'form__input'}}) }}
+                </div>
+                <div class="form__control mb-2">
+                    {{ form_label(registration_form.name, null, {'label_attr': {'class': 'form__label'}}) }}
+                    {{ form_errors(registration_form.name) }}
+                    {{ form_widget(registration_form.name, {'attr': {'class': 'form__input'}}) }}
+                </div>
+            </div>
+            <div class="form__container">
+                <div class="form__control mb-2">
+                    {{ form_label(registration_form.plainPassword.first, null, {'label_attr': {'class': 'form__label'}}) }}
+                    {{ form_errors(registration_form.plainPassword.first) }}
+                    {{ form_widget(registration_form.plainPassword.first, {'attr': {'class': 'form__input'}}) }}
+                </div>
+                <div class="form__control mb-2">
+                    {{ form_label(registration_form.plainPassword.second, null, {'label_attr': {'class': 'form__label'}}) }}
+                    {{ form_widget(registration_form.plainPassword.second, {'attr': {'class': 'form__input'}}) }}
+                </div>
+            </div>
+            <div class="form__container">
+                <div class="form__control mb-2">
+                    {{ form_label(registration_form.age, null, {'label_attr': {'class': 'form__label'}}) }}
+                    {{ form_errors(registration_form.age) }}
+                    {{ form_widget(registration_form.age, {'attr': {'class': 'form__input'}}) }}
+                </div>
+                <div class="form__control mb-2">
+                    {{ form_label(registration_form.nationality, null, {'label_attr': {'class': 'form__label'}}) }}
+                    {{ form_errors(registration_form.nationality) }}
+                    {{ form_widget(registration_form.nationality, {'attr': {'class': 'form__input'}}) }}
+                </div>
+            </div>
             <div class="form__control mb-3">
                 <button class="btn btn-outline">Inscription</button>
             </div>
         {{ form_end(registration_form) }}
-        <span class="fw-5">Vous n'avez pas de compte ? <a href="{{ path('security_registration') }}">Inscrivez-vous !</a></span>
+        <span class="fw-5">Vous avez déjà un compte ? <a href="{{ path('security_login') }}">Connectez-vous !</a></span>
     </section>
 {% endblock %}
