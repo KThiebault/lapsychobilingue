@@ -54,4 +54,10 @@ final class SecurityController
             'menu' => 'login'
         ]));
     }
+
+    #[Route(path: '/deconnexion' , name: 'security_logout', methods: 'GET')]
+    public function logout(): void
+    {
+        throw new \Exception('This should never be reached!');
+    }
 }
