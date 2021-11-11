@@ -21,6 +21,7 @@
                 <label for="remember" class="form__label">Se souvenir de moi</label>
                 <input type="checkbox" name="_remember_me" id="remember" class="form__input">
             </div>
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('psy_authenticate') }}">
             <div class="form__control mb-3">
                 <button class="btn btn-outline">Se connecter</button>
             </div>

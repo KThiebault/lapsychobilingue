@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Entity\User;
 use App\Type\RegistrationType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -23,7 +22,7 @@ final class SecurityController
     }
 
     #[Route(path: '/connexion' , name: 'security_login', methods: ['GET', 'POST'])]
-    public function login(AuthenticationUtils$authenticationUtils): Response
+    public function login(AuthenticationUtils $authenticationUtils): Response
     {
         return new Response($this->environment->render('security/login.html.twig', [
             'error' => $authenticationUtils->getLastAuthenticationError(),
