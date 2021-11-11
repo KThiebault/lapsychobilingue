@@ -13,6 +13,12 @@
     <body>
     {% include 'partials/_header.html.twig' %}
     <main>
+        {% for message in app.flashes('success') %}
+            <div class="flash-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+
         {% block body %}{% endblock %}
     </main>
     {% include 'partials/_footer.html.twig' %}

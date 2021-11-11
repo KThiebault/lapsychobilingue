@@ -23,6 +23,8 @@ class PostFixtures extends Fixture
                 ->setSummary('Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore')
                 ->setPicture('blog/pictures/picture' . $i . '.jpg')
                 ->setOnlineAt(new DateTime());
+            $post->setSlug($this->slugger->slug($post->getTitle())->lower()->toString());
+
             $manager->persist($post);
         }
 
