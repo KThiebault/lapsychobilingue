@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <section class="wrapper wrapper-height wrapper-center">
+        <h1 class="primary__title mb-3">Connexion</h1>
+        {% if error %}
+            <div class="alert alert-danger mb-2">
+                {{ error }}
+            </div>
+        {% endif %}
+        <form method="post">
+            <div class="form__control mb-2">
+                <label for="email" class="form__label">Adresse e-mail:</label>
+                <input type="email" name="email" id="email" class="form__input">
+            </div>
+            <div class="form__control mb-2">
+                <label for="password" class="form__label">Mot de passe:</label>
+                <input type="password" name="password" id="password" class="form__input">
+            </div>
+            <div class="form__control form__control-reverse mb-2">
+                <label for="remember" class="form__label">Se souvenir de moi</label>
+                <input type="checkbox" name="_remember_me" id="remember" class="form__input">
+            </div>
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('psy_authenticate') }}">
+            <div class="form__control mb-3">
+                <button class="btn btn-outline">Se connecter</button>
+            </div>
+        </form>
+        <span class="fw-5">Vous n'avez pas de compte ? <a href="{{ path('security_registration') }}">Inscrivez-vous !</a></span>
+    </section>
+{% endblock %}

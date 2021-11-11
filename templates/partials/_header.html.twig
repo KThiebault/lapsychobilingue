@@ -6,7 +6,11 @@
             <li><a href="{{ path('home_index') }}" {{ current_path('presentation') }} title="Qui suis-je">Qui suis-je</a></li>
             <li><a href="{{ path('home_index') }}" {{ current_path('presentation_support') }} title="La prise en charge">La prise en charge</a></li>
             <li><a href="{{ path('home_index') }}" {{ current_path('blog') }} title="Blog">Blog</a></li>
-            <li><a href="{{ path('home_index') }}" {{ current_path('login') }} title="Connexion">Connexion</a></li>
+            {% if not app.user %}
+                <li><a href="{{ path('security_login') }}" {{ current_path('login') }} title="Connexion">Connexion</a></li>
+            {% else %}
+                <li><a href="{{ path('security_logout') }}" {{ current_path('login') }} title="Déconnexion">Déconnexion</a></li>
+            {% endif %}
         </ul>
     </nav>
     <button aria-label="Afficher Le Menu" title="Afficher Le Menu">
