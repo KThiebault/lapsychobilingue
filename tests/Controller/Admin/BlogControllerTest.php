@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Tests\Controller\Admin;
 
 use App\Repository\PostRepository;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -16,18 +17,45 @@ final class BlogControllerTest extends WebTestCase
     public function testGoodUrl(string $method, string $uri): void
     {
         $client = self::createClient();
+        $userRepository = $client->getContainer()->get(UserRepository::class);
+        $client->loginUser($userRepository->findOneBy(['email' => 'admin1@admin.fr']));
+
         $client->request($method, $uri);
 
         self::assertResponseIsSuccessful();
     }
 
+    /**
+     * @dataProvider generateUri
+     */
+    public function testAccessDenied(string $method, string $uri): void
+    {
+        $client = self::createClient();
+        $userRepository = $client->getContainer()->get(UserRepository::class);
+        $client->loginUser($userRepository->findOneBy(['email' => 'psychologist1@psychologist.fr']));
+
+        $client->request($method, $uri);
+        $client->followRedirect();
+        self::assertRouteSame('security_login');
+
+        $client->loginUser($userRepository->findOneBy(['email' => 'patient1@patient.fr']));
+        $client->request($method, $uri);
+        $client->followRedirect();
+        self::assertRouteSame('security_login');
+    }
+
     public function testListingPost(): void
     {
         $client = self::createClient();
-        $crawler = $client->request('GET', '/admin/blog');
-        $repository = $client->getContainer()->get(PostRepository::class);
 
-        self::assertCount($repository->count([]), $crawler->filter('tbody tr'));
+        $postRepository = $client->getContainer()->get(PostRepository::class);
+        $userRepository = $client->getContainer()->get(UserRepository::class);
+
+        $client->loginUser($userRepository->findOneBy(['email' => 'admin1@admin.fr']));
+
+        $crawler = $client->request('GET', '/admin/blog');
+
+        self::assertCount($postRepository->count([]), $crawler->filter('tbody tr'));
     }
 
     public function testUpdatePostWithGoodData(): void
@@ -40,14 +68,17 @@ final class BlogControllerTest extends WebTestCase
         ];
         $client = self::createClient();
 
-        $repository = $client->getContainer()->get(PostRepository::class);
-        $post = $repository->findOneBy([]);
+        $postRepository = $client->getContainer()->get(PostRepository::class);
+        $userRepository = $client->getContainer()->get(UserRepository::class);
+        $client->loginUser($userRepository->findOneBy(['email' => 'admin1@admin.fr']));
+
+        $post = $postRepository->findOneBy([]);
 
         $client->request('GET', '/admin/blog/' . $post->getId());
         $client->submitForm('Modifier', $data);
         self::assertResponseStatusCodeSame(Response::HTTP_FOUND);
 
-        $updatedPost = $repository->findOneBy(['id' => $post->getId()]);
+        $updatedPost = $postRepository->findOneBy(['id' => $post->getId()]);
         $client->followRedirect();
 
         self::assertEquals($data['post[title]'], $updatedPost->getTitle());
@@ -64,14 +95,17 @@ final class BlogControllerTest extends WebTestCase
     {
         $client = self::createClient();
 
-        $repository = $client->getContainer()->get(PostRepository::class);
-        $post = $repository->findOneBy([]);
+        $postRepository = $client->getContainer()->get(PostRepository::class);
+        $post = $postRepository->findOneBy([]);
+
+        $userRepository = $client->getContainer()->get(UserRepository::class);
+        $client->loginUser($userRepository->findOneBy(['email' => 'admin1@admin.fr']));
 
         $client->request('GET', '/admin/blog/' . $post->getId());
         $client->submitForm('Modifier', $data);
 
         self::assertResponseStatusCodeSame(Response::HTTP_OK);
-        $updatedPost = $repository->findOneBy(['id' => $post->getId()]);
+        $updatedPost = $postRepository->findOneBy(['id' => $post->getId()]);
 
         self::assertEquals($post->getTitle(), $updatedPost->getTitle());
         self::assertEquals($post->getContent(), $updatedPost->getContent());

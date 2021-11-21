@@ -12,7 +12,7 @@ class SecurityControllerTest extends WebTestCase
         $client = static::createClient();
         $client->request('GET', '/connexion');
         $client->submitForm('Se connecter', [
-            'email' => 'fixture1@fixture.fr',
+            'email' => 'patient1@patient.fr',
             'password' => 'fixture'
         ]);
 
@@ -24,7 +24,7 @@ class SecurityControllerTest extends WebTestCase
         $client = static::createClient();
         $client->request('GET', '/connexion');
         $client->submitForm('Se connecter', [
-            'email' => 'fixture1@fixture.fr',
+            'email' => 'patient1@patient.fr',
             'password' => 'failure'
         ]);
 
@@ -88,7 +88,7 @@ class SecurityControllerTest extends WebTestCase
         ];
         yield [
             [
-                'registration[email]' => 'fixture1@fixture.fr',
+                'registration[email]' => 'patient1@patient.fr',
                 'registration[name]' => 'test',
                 'registration[plainPassword][first]' => 'test1234',
                 'registration[plainPassword][second]' => 'test1234',

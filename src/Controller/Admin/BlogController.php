@@ -17,7 +17,9 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
 
-#[Route(path: '/admin')]
+#[
+    Route(path: '/admin'),
+]
 final class BlogController
 {
     public function __construct(private Environment $twig, private PostRepository $repository)
