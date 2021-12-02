@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <section class="wrapper default__section">
+        {{ form_start(create_form) }}
+        <div class="form__container">
+            <div class="form__control mb-2">
+                {{ form_label(create_form.title, null, {'label_attr': {'class': 'form__label'}}) }}
+                {{ form_errors(create_form.title) }}
+                {{ form_widget(create_form.title, {'attr': {'class': 'form__input'}}) }}
+            </div>
+            <div class="form__control mb-2">
+                {{ form_label(create_form.summary, null, {'label_attr': {'class': 'form__label'}}) }}
+                {{ form_errors(create_form.summary) }}
+                {{ form_widget(create_form.summary, {'attr': {'class': 'form__input'}}) }}
+            </div>
+            <div class="form__control mb-2">
+                {{ form_label(create_form.content, null, {'label_attr': {'class': 'form__label'}}) }}
+                {{ form_errors(create_form.content) }}
+                {{ form_widget(create_form.content, {'attr': {'class': 'form__input'}}) }}
+            </div>
+            <div class="form__control mb-2">
+                {{ form_label(create_form.uploadedFile, null, {'label_attr': {'class': 'form__label'}}) }}
+                {{ form_errors(create_form.uploadedFile) }}
+                {{ form_widget(create_form.uploadedFile, {'attr': {'class': 'form__input'}}) }}
+            </div>
+            <div class="form__control mb-2">
+                {{ form_label(create_form.onlineAt, null, {'label_attr': {'class': 'form__label'}}) }}
+                {{ form_errors(create_form.onlineAt) }}
+                {{ form_widget(create_form.onlineAt, {'attr': {'class': 'form__input'}}) }}
+            </div>
+            <div class="form__control mb-2">
+                {{ form_label(create_form.online, null, {'label_attr': {'class': 'form__label'}}) }}
+                {{ form_errors(create_form.online) }}
+                {{ form_widget(create_form.online, {'attr': {'class': 'form__input'}}) }}
+            </div>
+            <div class="form__control mb-3">
+                <button class="btn btn-outline">Créer</button>
+            </div>
+        </div>
+        {{ form_end(create_form) }}
+    </section>
+{% endblock %}

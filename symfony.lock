@@ -328,6 +328,9 @@
     "symfony/http-kernel": {
         "version": "v5.3.6"
     },
+    "symfony/mime": {
+        "version": "v5.3.11"
+    },
     "symfony/options-resolver": {
         "version": "v5.3.7"
     },
@@ -358,6 +361,9 @@
     "symfony/polyfill-intl-icu": {
         "version": "v1.23.0"
     },
+    "symfony/polyfill-intl-idn": {
+        "version": "v1.23.0"
+    },
     "symfony/polyfill-intl-normalizer": {
         "version": "v1.23.0"
     },
@@ -371,6 +377,9 @@
         "version": "v1.23.1"
     },
     "symfony/polyfill-php81": {
+        "version": "v1.23.0"
+    },
+    "symfony/polyfill-uuid": {
         "version": "v1.23.0"
     },
     "symfony/profiler-pack": {
@@ -458,6 +467,9 @@
     },
     "symfony/twig-pack": {
         "version": "v1.0.1"
+    },
+    "symfony/uid": {
+        "version": "v5.3.10"
     },
     "symfony/validator": {
         "version": "4.3",

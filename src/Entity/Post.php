@@ -14,6 +14,7 @@ use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\PrePersist;
 use Doctrine\ORM\Mapping\PreUpdate;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[
@@ -74,6 +75,12 @@ final class Post
 
     #[Column(type: 'datetime_immutable')]
     private DateTimeImmutable $createdAt;
+
+    #[
+        Assert\NotBlank,
+        Assert\File(maxSize: '1M', mimeTypes: ['image/*']),
+    ]
+    private UploadedFile $uploadedFile;
 
     public function getId(): int
     {
@@ -178,6 +185,17 @@ final class Post
     public function setCreatedAt(): Post
     {
         $this->createdAt = new DateTimeImmutable();
+        return $this;
+    }
+
+    public function getUploadedFile(): UploadedFile
+    {
+        return $this->uploadedFile;
+    }
+
+    public function setUploadedFile(UploadedFile $uploadedFile): Post
+    {
+        $this->uploadedFile = $uploadedFile;
         return $this;
     }
 }

@@ -2,12 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Type;
+namespace App\Form;
 
 use App\Entity\Post;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -37,7 +38,15 @@ final class PostType extends AbstractType
                 'label' => 'Contenu :',
                 'empty_data' => ''
             ])
+            ->add('uploadedFile', FileType::class, [
+                'label' => 'Miniature :',
+                'attr' => [
+                    'accept' => '.jpg, .jpeg, .png, .gif'
+                ]
+            ])
             ->add('onlineAt', DateTimeType::class, [
+                'widget' => 'single_text',
+                'html5' => true,
                 'label' => 'Date & heure de publication :'
             ])
             ->add('online', CheckboxType::class, [
@@ -46,7 +55,8 @@ final class PostType extends AbstractType
             ])
             ->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) {
                 $post = $event->getData();
-                if (null !== $post->getTitle()) {
+
+                if ($post->getTitle() !== null) {
                     $post->setSlug($this->slugger->slug($post->getTitle())->lower()->toString());
                 }
             });

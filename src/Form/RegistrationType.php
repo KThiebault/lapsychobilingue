@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Type;
+namespace App\Form;
 
 use App\Entity\Users\Patient;
 use DateTime;
