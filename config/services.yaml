@@ -20,6 +20,18 @@ services:
         resource: '../src/Controller/'
         tags: [ 'controller.service_arguments' ]
 
+    # Implementation
+    Symfony\Component\Cache\Adapter\TagAwareAdapterInterface:
+        class: Symfony\Component\Cache\Adapter\TagAwareAdapter
+        arguments: ['@cache.app']
+
+    # Subscribers
+    App\EventListener\PostSubscriber:
+        tags:
+            - name: 'doctrine.event_subscriber'
+              entity: 'App\Entity\User'
+
+    # Twig
     App\Twig\AssetLoaderExtension:
         arguments:
             $environment: '%env(ASSET_ENV)%'

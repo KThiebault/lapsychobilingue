@@ -8,13 +8,14 @@ use App\Repository\PostRepository;
 use App\Service\FileUploader;
 use App\Form\PostType;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\Cache\Adapter\TagAwareAdapterInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Contracts\Cache\ItemInterface;
 use Twig\Environment;
 
 #[Route(path: '/admin')]
@@ -26,15 +27,21 @@ final class BlogController
         private FormFactoryInterface $formBuilder,
         private UrlGeneratorInterface $urlGenerator,
         private EntityManagerInterface $entityManager,
+        private TagAwareAdapterInterface $cache
     ) {
     }
 
     #[Route(path: '/blog' , name: 'admin_post_index', methods: 'GET')]
     public function index(): Response
     {
+        $posts = $this->cache->get('blog_post', function (ItemInterface $item) {
+            $item->tag('blog_post');
+            return $this->repository->findAll();
+        });
+
         return new Response($this->twig->render('admin/blog/index.html.twig',
             [
-                'posts' => $this->repository->findAll(),
+                'posts' => $posts,
                 'menu' => 'blog'
             ]
         ));
