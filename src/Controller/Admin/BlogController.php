@@ -26,7 +26,6 @@ final class BlogController
         private FormFactoryInterface $formBuilder,
         private UrlGeneratorInterface $urlGenerator,
         private EntityManagerInterface $entityManager,
-        private ContainerInterface $container
     ) {
     }
 
@@ -42,15 +41,14 @@ final class BlogController
     }
 
     #[Route(path: '/blog/create', name: 'admin_post_create', methods: ['GET', 'POST'])]
-    public function create(Request $request, FileUploader $uploader): Response
+    public function create(Request $request, FileUploader $uploader, string $postUploadPath): Response
     {
         $form = $this->formBuilder->create(PostType::class)->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $form->getData()->setPicture(
                 $uploader->upload(
                     $form->getData()->getUploadedFile(),
-                    $this->container->getParameter('app.post_picture_directory')
+                    $postUploadPath
                 )
             );
 

@@ -5,6 +5,8 @@ services:
     _defaults:
         autowire: true
         autoconfigure: true
+        bind:
+            string $postUploadPath: '%app.post_picture_directory%'
 
     App\:
         resource: '../src/'
@@ -16,7 +18,7 @@ services:
 
     App\Controller\:
         resource: '../src/Controller/'
-        tags: ['controller.service_arguments']
+        tags: [ 'controller.service_arguments' ]
 
     App\Twig\AssetLoaderExtension:
         arguments:

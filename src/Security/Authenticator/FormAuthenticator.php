@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Security\Authenticator;
 
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -17,7 +19,7 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordC
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Component\Security\Http\Authenticator\Passport\PassportInterface;
 
-class FormAuthenticator extends AbstractAuthenticator
+final class FormAuthenticator extends AbstractAuthenticator
 {
     private const LOGIN_ROUTE = 'security_login';
     private const SUCCESS_ROUTE = 'home_index';
@@ -35,7 +37,7 @@ class FormAuthenticator extends AbstractAuthenticator
             self::LOGIN_ROUTE === $request->attributes->get('_route');
     }
 
-    public function authenticate(Request $request): PassportInterface
+    public function authenticate(Request $request): Passport
     {
         return new Passport(
             new UserBadge($request->request->get('email')),

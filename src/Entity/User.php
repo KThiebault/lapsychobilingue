@@ -95,7 +95,12 @@ abstract class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->email;
     }
 
-    public function getUsername()
+    public function getUsername(): string
+    {
+        return $this->email;
+    }
+
+    public function getUserIdentifier(): string
     {
         return $this->email;
     }
@@ -152,6 +157,9 @@ abstract class User implements UserInterface, PasswordAuthenticatedUserInterface
         return array_unique($roles);
     }
 
-    public function getSalt(){}
+    public function getSalt(): ?string
+    {
+        return null;
+    }
     public function eraseCredentials(){}
 }

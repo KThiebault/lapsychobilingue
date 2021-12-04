@@ -8,7 +8,7 @@ use App\Entity\Post;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
-class PostRepository extends ServiceEntityRepository
+final class PostRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
@@ -18,7 +18,7 @@ class PostRepository extends ServiceEntityRepository
     /**
      * @return array<int, Post>
      */
-    public function findLatest(int $maxResults = 3):array
+    public function findLatest(int $maxResults = 3): array
     {
         return $this->createQueryBuilder('p')
             ->where('p.online = 1')
