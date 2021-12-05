@@ -4,11 +4,17 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\Entity\Users\Administrator;
+use App\Entity\Users\Patient;
+use App\Entity\Users\Psychologist;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\DiscriminatorColumn;
+use Doctrine\ORM\Mapping\DiscriminatorMap;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Id;
+use Doctrine\ORM\Mapping\InheritanceType;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -16,9 +22,18 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 #[
     Entity(repositoryClass: UserRepository::class),
-    UniqueEntity('email')
+    UniqueEntity('email'),
+    InheritanceType('SINGLE_TABLE'),
+    DiscriminatorColumn(name: 'discriminator', type: 'string'),
+    DiscriminatorMap(
+        [
+            'patient' => Patient::class,
+            'psychologist' => Psychologist::class,
+            'administrator' => Administrator::class,
+        ]
+    )
 ]
-final class User implements UserInterface, PasswordAuthenticatedUserInterface
+abstract class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[
         Id,
@@ -80,7 +95,12 @@ final class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->email;
     }
 
-    public function getUsername()
+    public function getUsername(): string
+    {
+        return $this->email;
+    }
+
+    public function getUserIdentifier(): string
     {
         return $this->email;
     }
@@ -137,6 +157,9 @@ final class User implements UserInterface, PasswordAuthenticatedUserInterface
         return array_unique($roles);
     }
 
-    public function getSalt(){}
+    public function getSalt(): ?string
+    {
+        return null;
+    }
     public function eraseCredentials(){}
 }

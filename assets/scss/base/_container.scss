@@ -19,6 +19,15 @@
   @extend %container-grid;
 }
 
+.container-sidebar {
+  background-color: var(--background-color-light);
+  padding-left: calc(var(--sidebar-width) + calc(var(--default-space) * 4));
+}
+
+.container-admin {
+  background-color: var(--background-color-light);
+}
+
 .container-card {
   @extend %container-grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -34,6 +43,10 @@
 
 .container.container-reverse {
   flex-direction: column;
+}
+
+.display-reset {
+  display: initial;
 }
 
 @media only screen and (min-width: 850px) {

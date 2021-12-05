@@ -1,0 +1,53 @@
+{% extends '/admin/admin_base.html.twig' %}
+
+{% block body %}
+    <div class="container container-center justify-between">
+        <h1 class="secondary__title">
+            Blog
+        </h1>
+        <a href="{{ path('admin_blog_create') }}" class="btn btn-primary-icon">
+            <svg class="icon" width="16px" height="16px">
+                <use xlink:href="/images/sprite.svg?logo#add"></use>
+            </svg>
+            Créer un article
+        </a>
+    </div>
+    <table class="table table-dashboard mt-2">
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>Titre</th>
+            <th>Statut</th>
+            <th colspan="2">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for post in posts %}
+            <tr>
+                <td>{{ post.id }}</td>
+                <td>{{ post.title }}</td>
+                <td>
+                    <svg class="icon {{ post.online ? 'alert-success' : 'alert-danger' }}" width="24px" height="24px">
+                        <use xlink:href="/images/sprite.svg?logo#bolt"></use>
+                    </svg>
+                <td colspan="2">
+                    <a class="alert-success" href="{{ path('admin_blog_update', {id: post.id}) }}">
+                        <svg class="icon" width="24px" height="24px">
+                            <use xlink:href="/images/sprite.svg?logo#pen"></use>
+                        </svg>
+                    </a>
+                    <form class="display-reset" action="{{ url('admin_blog_delete', { id: post.id }) }}" method="post">
+                        <input type="hidden" name="_method" value="DELETE" />
+                        <input type="hidden" name="_token" value="{{ csrf_token('blog_delete' ~ post.id) }}">
+                        <button style="cursor: pointer">
+                            <svg class="icon alert-danger" width="24px" height="24px">
+                                <use xlink:href="/images/sprite.svg?logo#trash"></use>
+                            </svg>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Type;
+declare(strict_types=1);
 
-use App\Entity\User;
+namespace App\Form;
+
+use App\Entity\Users\Patient;
 use DateTime;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
@@ -18,7 +20,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 final class RegistrationType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('email', EmailType::class, [
@@ -60,9 +62,9 @@ final class RegistrationType extends AbstractType
             ]);
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefault('data_class', User::class);
+        $resolver->setDefault('data_class', Patient::class);
     }
 
 }

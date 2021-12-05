@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <section class="wrapper default__section">
+        {{ form_start(update_form) }}
+        <div class="form__container">
+            {% include 'admin/blog/partials/_form.html.twig' with { form: update_form } %}
+            <div class="form__control mb-3">
+                <button class="btn btn-outline">Modifier</button>
+            </div>
+        </div>
+        {{ form_end(update_form) }}
+    </section>
+{% endblock %}

@@ -14,14 +14,14 @@ use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\PrePersist;
 use Doctrine\ORM\Mapping\PreUpdate;
-use phpDocumentor\Reflection\Types\True_;
-use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[
     Entity(repositoryClass: PostRepository::class),
     HasLifecycleCallbacks
 ]
-class Post
+final class Post
 {
     #[
         Id,
@@ -30,16 +30,32 @@ class Post
     ]
     private int $id;
 
-    #[Column(type: 'string', unique: true)]
+    #[
+        Column(type: 'string', unique: true),
+        Assert\NotBlank,
+        Assert\Length(min: 6)
+    ]
     private string $slug;
 
-    #[Column(type: 'string', unique: true)]
+    #[
+        Column(type: 'string', unique: true),
+        Assert\NotBlank,
+        Assert\Length(min: 6, max: 255)
+    ]
     private string $title;
 
-    #[Column(type: 'text')]
+    #[
+        Column(type: 'text'),
+        Assert\NotBlank,
+        Assert\Length(min: 10)
+    ]
     private string $content;
 
-    #[Column(type: 'text')]
+    #[
+        Column(type: 'text'),
+        Assert\NotBlank,
+        Assert\Length(min: 10)
+    ]
     private string $summary;
 
     #[Column(type: 'string')]
@@ -48,7 +64,10 @@ class Post
     #[Column(type: 'boolean', options: ['default' => true])]
     private bool $online = true;
 
-    #[Column(type: 'datetime')]
+    #[
+        Column(type: 'datetime'),
+        Assert\NotBlank
+    ]
     private DateTime $onlineAt;
 
     #[Column(type: 'datetime', nullable: true)]
@@ -57,10 +76,11 @@ class Post
     #[Column(type: 'datetime_immutable')]
     private DateTimeImmutable $createdAt;
 
-    public function __construct(private SluggerInterface $slugger)
-    {
-        $this->slugger = $slugger;
-    }
+    #[
+        Assert\NotBlank,
+        Assert\File(maxSize: '1M', mimeTypes: ['image/*']),
+    ]
+    private UploadedFile $uploadedFile;
 
     public function getId(): int
     {
@@ -72,13 +92,9 @@ class Post
         return $this->slug;
     }
 
-    #[
-        PrePersist,
-        PreUpdate
-    ]
-    public function setSlug(): Post
+    public function setSlug(string $slug): Post
     {
-        $this->slug = $this->slugger->slug($this->getTitle())->lower()->toString();
+        $this->slug = $slug;
         return $this;
     }
 
@@ -169,6 +185,17 @@ class Post
     public function setCreatedAt(): Post
     {
         $this->createdAt = new DateTimeImmutable();
+        return $this;
+    }
+
+    public function getUploadedFile(): UploadedFile
+    {
+        return $this->uploadedFile;
+    }
+
+    public function setUploadedFile(UploadedFile $uploadedFile): Post
+    {
+        $this->uploadedFile = $uploadedFile;
         return $this;
     }
 }

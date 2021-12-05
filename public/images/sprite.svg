@@ -1,0 +1,39 @@
+<svg width="0" height="0" class="hidden">
+    <symbol fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" id="blog">
+        <path fill="currentColor" d="M7 18h10v-2H7v2ZM17 14H7v-2h10v2ZM7 10h4V8H7v2Z"/>
+        <path fill="currentColor" fill-rule="evenodd" d="M6 2a3 3 0 0 0-3 3v14a3 3 0 0 0 3 3h12a3 3 0 0 0 3-3V9a7 7 0 0 0-7-7H6Zm0 2h7v5h6v10a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1Zm9 .1A5.009 5.009 0 0 1 18.584 7H15V4.1Z" clip-rule="evenodd"/>
+    </symbol>
+
+    <symbol fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" id="calendar">
+        <path fill="currentColor" d="M8 13a1 1 0 1 1 0-2 1 1 0 0 1 0 2ZM8 17a1 1 0 1 1 0-2 1 1 0 0 1 0 2ZM11 16a1 1 0 1 0 2 0 1 1 0 0 0-2 0ZM16 17a1 1 0 1 1 0-2 1 1 0 0 1 0 2ZM11 12a1 1 0 1 0 2 0 1 1 0 0 0-2 0ZM16 13a1 1 0 1 1 0-2 1 1 0 0 1 0 2ZM8 7a1 1 0 0 0 0 2h8a1 1 0 1 0 0-2H8Z"/>
+        <path fill="currentColor" fill-rule="evenodd" d="M6 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3h12a3 3 0 0 0 3-3V6a3 3 0 0 0-3-3H6Zm12 2H6a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1Z" clip-rule="evenodd"/>
+    </symbol>
+
+    <symbol fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" id="pen">
+        <path fill="currentColor" fill-rule="evenodd" d="M21.264 2.293a1 1 0 0 0-1.415 0l-.872.872a3.001 3.001 0 0 0-3.415.587L4.955 14.358l5.657 5.657L21.22 9.408c.924-.923 1.119-2.3.586-3.414l.873-.873a1 1 0 0 0 0-1.414l-1.415-1.414Zm-4.268 8.51-6.384 6.384-2.828-2.829 6.383-6.383 2.829 2.829Zm1.818-1.818.99-.99a1 1 0 0 0 0-1.415l-1.413-1.414a1 1 0 0 0-1.415 0l-.99.99 2.828 2.83Z"/>
+        <path fill="currentColor" d="m2 22.95 2.122-7.778 5.656 5.657L2 22.95Z"/>
+    </symbol>
+
+    <symbol fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" id="cross">
+        <path fill="currentColor" d="M6.225 4.811a1 1 0 0 0-1.414 1.414L10.586 12 4.81 17.775a1 1 0 1 0 1.414 1.414L12 13.414l5.775 5.775a1 1 0 0 0 1.414-1.414L13.414 12l5.775-5.775a1 1 0 0 0-1.414-1.414L12 10.586 6.225 4.81Z"/>
+    </symbol>
+
+    <symbol fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" id="trash">
+        <path fill="currentColor" fill-rule="evenodd" d="M17 5V4a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v1H4a1 1 0 0 0 0 2h1v11a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3V7h1a1 1 0 1 0 0-2h-3Zm-2-1H9v1h6V4Zm2 3H7v11a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V7Z" clip-rule="evenodd"/>
+        <path fill="currentColor" d="M9 9h2v8H9V9ZM13 9h2v8h-2V9Z"/>
+    </symbol>
+
+    <symbol fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" id="check">
+        <path fill="currentColor" d="M10.243 16.314 6 12.07l1.414-1.414 2.829 2.828 5.656-5.657 1.415 1.415-7.071 7.07Z"/>
+        <path fill="currentColor" fill-rule="evenodd" d="M1 12C1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 11-11 11S1 18.075 1 12Zm11 9a9 9 0 1 1 0-18 9 9 0 0 1 0 18Z" clip-rule="evenodd"/>
+    </symbol>
+
+    <symbol fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" id="bolt">
+        <path fill="currentColor" d="m9 21.5 8.5-8.5-4.5-3 2-7.5L6.5 11l4.5 3-2 7.5Z"/>
+    </symbol>
+
+    <symbol fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" id="add">
+        <path fill="currentColor" d="M12 4a1 1 0 0 0-1 1v6H5a1 1 0 1 0 0 2h6v6a1 1 0 1 0 2 0v-6h6a1 1 0 1 0 0-2h-6V5a1 1 0 0 0-1-1Z"/>
+    </symbol>
+</svg>
+

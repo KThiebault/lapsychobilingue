@@ -4,6 +4,23 @@
   padding: var(--default-space) calc(var(--default-space) * 2);
 }
 
+.alert-container {
+  border-radius: 4px;
+
+  &.alert-success {
+    color: var(--primary-color);
+    background-color: #52989b24;
+  }
+
+  &.alert-danger {
+    background-color: #ff000024;
+  }
+}
+
 .alert-danger {
   color: var(--alert-color);
+}
+
+.alert-success {
+  color: var(--secondary-color)
 }
