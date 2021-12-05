@@ -15,6 +15,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Security\Csrf\CsrfToken;
+use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Contracts\Cache\ItemInterface;
 use Twig\Environment;
 
@@ -31,7 +33,7 @@ final class BlogController
     ) {
     }
 
-    #[Route(path: '/blog' , name: 'admin_post_index', methods: 'GET')]
+    #[Route(path: '/blog' , name: 'admin_blog_index', methods: 'GET')]
     public function index(): Response
     {
         $posts = $this->cache->get('blog_post', function (ItemInterface $item) {
@@ -47,7 +49,7 @@ final class BlogController
         ));
     }
 
-    #[Route(path: '/blog/create', name: 'admin_post_create', methods: ['GET', 'POST'])]
+    #[Route(path: '/blog/create', name: 'admin_blog_create', methods: ['GET', 'POST'])]
     public function create(Request $request, FileUploader $uploader, string $postUploadPath): Response
     {
         $form = $this->formBuilder->create(PostType::class)->handleRequest($request);
@@ -64,23 +66,23 @@ final class BlogController
 
             $request->getSession()->getFlashBag()->add('success', 'Le post a bien été créé.');
             return new RedirectResponse(
-                $this->urlGenerator->generate('admin_post_update', ['id' => $form->getData()->getId()])
+                $this->urlGenerator->generate('admin_blog_update', ['id' => $form->getData()->getId()])
             );
         }
 
         return new Response($this->twig->render('admin/blog/create.html.twig',
             [
                 'create_form' => $form->createView(),
-                'menu' => 'blog_create'
+                'menu' => 'blog'
             ]
         ));
     }
 
-    #[Route(path: '/blog/update/{id}', name: 'admin_post_update', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
+    #[Route(path: '/blog/update/{id}', name: 'admin_blog_update', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function update(int $id, Request $request): Response {
         $post = $this->repository->find($id);
         if ($post === null) {
-            return new RedirectResponse($this->urlGenerator->generate('home_index'));
+            return new RedirectResponse($this->urlGenerator->generate('admin_blog_index'));
         }
 
         $form = $this->formBuilder->create(PostType::class, $post)->handleRequest($request);
@@ -90,15 +92,35 @@ final class BlogController
 
             $request->getSession()->getFlashBag()->add('success', 'Le post a bien été mis à jour.');
             return new RedirectResponse(
-                $this->urlGenerator->generate('admin_post_update', ['id' => $post->getId()])
+                $this->urlGenerator->generate('admin_blog_update', ['id' => $post->getId()])
             );
         }
 
         return new Response($this->twig->render('admin/blog/update.html.twig',
             [
                 'update_form' => $form->createView(),
-                'menu' => 'blog_update'
+                'menu' => 'blog'
             ]
         ));
+    }
+
+    #[Route(path: '/blog/delete/{id}', name: 'admin_blog_delete', requirements: ['id' => '\d+'], methods: ['DELETE'])]
+    public function delete(int $id, Request $request, CsrfTokenManagerInterface $csrfTokenManager): Response {
+        $post = $this->repository->find($id);
+
+        if ($post === null) {
+            return new RedirectResponse($this->urlGenerator->generate('admin_blog_index'));
+        }
+        if (
+            $csrfTokenManager->isTokenValid(
+                new CsrfToken('blog_delete' . $post->getId(), $request->get('_token')))
+        ) {
+            $this->entityManager->remove($post);
+            $this->entityManager->flush();
+
+            $request->getSession()->getFlashBag()->add('success', 'Le post a bien été supprimé.');
+        }
+
+        return new RedirectResponse($this->urlGenerator->generate('admin_blog_index'));
     }
 }

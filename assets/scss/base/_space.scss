@@ -2,6 +2,10 @@
   justify-content: center;
 }
 
+.justify-between {
+  justify-content: space-between;
+}
+
 @for $index from 1 through 13 {
   .mt-#{$index} {
     margin-top: calc(var(--default-space) * #{$index});

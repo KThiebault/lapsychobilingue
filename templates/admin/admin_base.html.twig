@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+
+        {% block javascripts %}
+            {{ asset_loader('main.js') }}
+        {% endblock %}
+    </head>
+    <body>
+        {% include '/admin/partials/_sidebar.html.twig' %}
+        <main class="container-sidebar pb-5">
+            {% include '/admin/partials/_header.html.twig' %}
+            <div class="wrapper mt-4">
+                {% for message in app.flashes('success') %}
+                    <div class="alert alert-container alert-success mb-4">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+
+                {% for message in app.flashes('error') %}
+                    <div class="alert alert-container alert-danger mb-4">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+
+                {% block body %}{% endblock %}
+            </div>
+        </main>
+    </body>
+</html>

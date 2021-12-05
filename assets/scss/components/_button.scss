@@ -32,6 +32,13 @@
   }
 }
 
+.btn-primary-icon {
+  @extend .btn-primary;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
 @media only screen and (min-width: 650px) {
   .btn {
     padding: calc(var(--default-space) * 2) calc(var(--default-space) * 3);

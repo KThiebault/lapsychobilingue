@@ -4,31 +4,7 @@
     <section class="wrapper default__section">
         {{ form_start(update_form) }}
         <div class="form__container">
-            <div class="form__control mb-2">
-                {{ form_label(update_form.title, null, {'label_attr': {'class': 'form__label'}}) }}
-                {{ form_errors(update_form.title) }}
-                {{ form_widget(update_form.title, {'attr': {'class': 'form__input'}}) }}
-            </div>
-            <div class="form__control mb-2">
-                {{ form_label(update_form.summary, null, {'label_attr': {'class': 'form__label'}}) }}
-                {{ form_errors(update_form.summary) }}
-                {{ form_widget(update_form.summary, {'attr': {'class': 'form__input'}}) }}
-            </div>
-            <div class="form__control mb-2">
-                {{ form_label(update_form.content, null, {'label_attr': {'class': 'form__label'}}) }}
-                {{ form_errors(update_form.content) }}
-                {{ form_widget(update_form.content, {'attr': {'class': 'form__input'}}) }}
-            </div>
-            <div class="form__control mb-2">
-                {{ form_label(update_form.onlineAt, null, {'label_attr': {'class': 'form__label'}}) }}
-                {{ form_errors(update_form.onlineAt) }}
-                {{ form_widget(update_form.onlineAt, {'attr': {'class': 'form__input'}}) }}
-            </div>
-            <div class="form__control mb-2">
-                {{ form_label(update_form.online, null, {'label_attr': {'class': 'form__label'}}) }}
-                {{ form_errors(update_form.online) }}
-                {{ form_widget(update_form.online, {'attr': {'class': 'form__input'}}) }}
-            </div>
+            {% include 'admin/blog/partials/_form.html.twig' with { form: update_form } %}
             <div class="form__control mb-3">
                 <button class="btn btn-outline">Modifier</button>
             </div>
