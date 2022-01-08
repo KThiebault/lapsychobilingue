@@ -1,0 +1,14 @@
+{% extends 'user/base.html.twig' %}
+
+{% block body %}
+    <section class="wrapper default__section">
+        {{ form_start(create_form) }}
+        <div class="form__container">
+            {% include 'user/admin/blog/partials/_form.html.twig' with { form: create_form } %}
+            <div class="form__control mb-3">
+                <button class="btn btn-outline">Créer</button>
+            </div>
+        </div>
+        {{ form_end(create_form) }}
+    </section>
+{% endblock %}

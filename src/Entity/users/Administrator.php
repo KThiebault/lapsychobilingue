@@ -8,7 +8,7 @@ use App\Entity\User;
 use Doctrine\ORM\Mapping\Entity;
 
 #[Entity]
-final class Administrator extends User
+final class Administrator extends Psychologist
 {
     public function getRoles(): array
     {

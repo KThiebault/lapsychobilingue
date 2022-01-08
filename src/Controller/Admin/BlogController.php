@@ -41,7 +41,7 @@ final class BlogController
             return $this->repository->findAll();
         });
 
-        return new Response($this->twig->render('admin/blog/index.html.twig',
+        return new Response($this->twig->render('user/admin/blog/index.html.twig',
             [
                 'posts' => $posts,
                 'menu' => 'blog'
@@ -70,7 +70,7 @@ final class BlogController
             );
         }
 
-        return new Response($this->twig->render('admin/blog/create.html.twig',
+        return new Response($this->twig->render('user/admin/blog/create.html.twig',
             [
                 'create_form' => $form->createView(),
                 'menu' => 'blog'
@@ -96,7 +96,7 @@ final class BlogController
             );
         }
 
-        return new Response($this->twig->render('admin/blog/update.html.twig',
+        return new Response($this->twig->render('user/admin/blog/update.html.twig',
             [
                 'update_form' => $form->createView(),
                 'menu' => 'blog'

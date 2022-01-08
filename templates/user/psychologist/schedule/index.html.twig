@@ -1,0 +1,54 @@
+{% extends 'user/base.html.twig' %}
+
+{% block body %}
+    <div class="container container-center justify-between">
+        <h1 class="secondary__title">
+            Planing
+        </h1>
+        <a href="{{ path('psychologist_schedule_create') }}" class="btn btn-primary-icon">
+            <svg class="icon" width="16px" height="16px">
+                <use xlink:href="/images/sprite.svg?logo#add"></use>
+            </svg>
+            Ajouter un horaire
+        </a>
+    </div>
+    <table class="table table-dashboard mt-2">
+        <thead>
+            <tr>
+                {% for day, schedules in days %}
+                    <th>{{ day }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for index in 0..maxSchedule %}
+                <tr>
+                    {% for schedules in days %}
+                        {% if schedules[index] is defined %}
+                            <td>
+                                {{ schedules[index].startedAt|date('H:i') }} - {{ schedules[index].endedAt|date('H:i') }}
+                                <a class="alert-success" href="{{ path('psychologist_schedule_update', {id: schedules[index].id}) }}">
+                                    <svg class="icon" width="24px" height="24px">
+                                        <use xlink:href="/images/sprite.svg?logo#pen"></use>
+                                    </svg>
+                                </a>
+                                <form class="display-reset" action="{{ url('psychologist_schedule_delete', { id: schedules[index].id }) }}" method="post">
+                                    <input type="hidden" name="_method" value="DELETE" />
+                                    <input type="hidden" name="_token" value="{{ csrf_token('schedule_delete' ~ schedules[index].id) }}">
+                                    <button style="cursor: pointer">
+                                        <svg class="icon alert-danger" width="24px" height="24px">
+                                            <use xlink:href="/images/sprite.svg?logo#trash"></use>
+                                        </svg>
+                                    </button>
+                                </form>
+                            </td>
+                        {% else %}
+                            <td></td>
+                        {% endif %}
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
