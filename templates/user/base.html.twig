@@ -11,9 +11,9 @@
         {% endblock %}
     </head>
     <body>
-        {% include '/admin/partials/_sidebar.html.twig' %}
+        {% include '/user/partials/_sidebar.html.twig' %}
         <main class="container-sidebar pb-5">
-            {% include '/admin/partials/_header.html.twig' %}
+            {% include '/user/partials/_header.html.twig' %}
             <div class="wrapper mt-4">
                 {% for message in app.flashes('success') %}
                     <div class="alert alert-container alert-success mb-4">

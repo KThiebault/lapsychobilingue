@@ -1,0 +1,15 @@
+<div class="form__control mb-2">
+    {{ form_label(form.day, null, {'label_attr': {'class': 'form__label'}}) }}
+    {{ form_errors(form.day) }}
+    {{ form_widget(form.day, {'attr': {'class': 'form__input'}}) }}
+</div>
+<div class="form__control mb-2">
+    {{ form_label(form.startedAt, null, {'label_attr': {'class': 'form__label'}}) }}
+    {{ form_errors(form.startedAt) }}
+    {{ form_widget(form.startedAt, {'attr': {'class': 'form__input'}}) }}
+</div>
+<div class="form__control mb-2">
+    {{ form_label(form.endedAt, null, {'label_attr': {'class': 'form__label'}}) }}
+    {{ form_errors(form.endedAt) }}
+    {{ form_widget(form.endedAt, {'attr': {'class': 'form__input'}}) }}
+</div>
